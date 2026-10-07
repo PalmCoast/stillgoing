@@ -230,6 +230,10 @@ export function HomeScreen({ profile, muted, savesOn, rehearsal, onToggleMute, o
             <a href="?rehearsal=1">Rehearsal mode for a short demo</a>
           )}
           <span>Saves stay on this device. No account.</span>
+          <span className="credit">
+            Built during <a href="https://hackyard.tech" target="_blank" rel="noreferrer">HackYard Yard #4</a> by First Deploy{' '}
+            <a href="https://x.com/firstdeployai" target="_blank" rel="noreferrer">@firstdeployai</a>
+          </span>
         </footer>
       </div>
 

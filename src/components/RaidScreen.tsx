@@ -117,6 +117,12 @@ export function RaidScreen({ setup, muted, onToggleMute, onEnd }: Props) {
         <div key={engine.hitPulse} className={engine.hitPulse > 0 ? 'boss-wrap is-hit' : 'boss-wrap'}>
           <BossArt chore={chore.id} mood={mood} />
         </div>
+        {engine.hitPulse > 0 && engine.phase !== 'challenge' && (
+          <p className="hit-toast" key={`hit-${engine.hitPulse}`} aria-hidden="true">
+            <strong>Still going</strong>
+            <span>Combo ×{engine.combo}</span>
+          </p>
+        )}
       </div>
 
       <div className="hud">
@@ -172,6 +178,11 @@ export function RaidScreen({ setup, muted, onToggleMute, onEnd }: Props) {
   );
 }
 
+function isFinalStretch(engine: Engine): boolean {
+  const ratio = hpRatio(engine.elapsedMs, engine.durationMs);
+  return ratio > 0 && ratio < 0.2;
+}
+
 function usePulseSound(engine: Engine): string {
   const previous = useRef(engine);
   const [note, setNote] = useState('');
@@ -187,6 +198,9 @@ function usePulseSound(engine: Engine): string {
     } else if (engine.phase === 'challenge' && prior.phase !== 'challenge') {
       sfx.alert();
       setNote('Still going? Answer the check.');
+    } else if (isFinalStretch(engine) && !isFinalStretch(prior) && engine.phase !== 'clear' && engine.phase !== 'wipe') {
+      sfx.stretch();
+      setNote('Final stretch. Finish it.');
     }
     previous.current = engine;
   }, [engine]);

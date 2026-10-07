@@ -439,6 +439,18 @@ button {
   font-weight: 700;
 }
 
+.colophon .credit {
+  flex-basis: 100%;
+  color: rgba(246, 241, 231, 0.55);
+  font-size: 0.85rem;
+}
+
+.colophon .credit a {
+  color: rgba(246, 241, 231, 0.85);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .dock {
   position: fixed;
   right: 0;
@@ -604,6 +616,57 @@ button {
   width: 100%;
   height: auto;
   animation: bob 2.6s ease-in-out infinite;
+}
+
+.hit-toast {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  z-index: 2;
+  display: grid;
+  gap: 2px;
+  justify-items: center;
+  margin: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--lime);
+  color: #120814;
+  box-shadow: 0 6px 0 #8eae12;
+  pointer-events: none;
+  transform: translateX(-50%);
+  animation: hit-toast 1.6s ease forwards;
+}
+
+.hit-toast strong {
+  font-family: "Syne Variable", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.hit-toast span {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@keyframes hit-toast {
+  0% { opacity: 0; transform: translate(-50%, 10px) scale(0.8); }
+  14% { opacity: 1; transform: translate(-50%, 0) scale(1.06); }
+  24% { transform: translate(-50%, 0) scale(1); }
+  78% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -18px) scale(1); }
+}
+
+.mark-label {
+  position: relative;
+  color: #120814;
+  font-family: "Syne Variable", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .boss-wrap.is-hit {
@@ -1047,6 +1110,12 @@ button {
 
   .rewards strong {
     font-size: 1.05rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hit-toast {
+    animation: none;
   }
 }
 

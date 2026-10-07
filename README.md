@@ -1,61 +1,82 @@
 # Still Going
 
-> Still Going is a boss fight that only dies if you actually finish the chore.
+> **Still Going is a boss fight that only dies if you actually finish the chore.**
 
-The game you play while you finish the chore. Pick the dishes, the laundry, the trash, the vacuum, the desk, the inbox, or a workout. The timer is the boss's HP. Stay with the task until the clock runs out.
+Pick a real chore — dishes, laundry, trash, vacuum, desk, inbox, or a workout — and start a raid when you start the task. The timer is the boss's HP. Every 40–50 seconds the phone asks **"Still going?"** Answer it and the fight goes on. Ignore it, or walk off with the phone, and the boss wins. Last the full clock and the boss goes down, because the chore did.
 
-![Home: pick a chore, pick a duration, start the raid](docs/home.png)
+![Still Going: pick a chore, start the raid, answer the checks, drop the boss](docs/hero.png)
 
-## How this fits the Yard theme
+**Demo video (55s):** [`demo/still-going-demo.mp4`](demo/still-going-demo.mp4)
 
-HackYard Yard #4 is **Gamification**. The rule is that the game has to help you complete a real chore while you play, not just wear a chore costume.
+Built during **HackYard Yard #4** (theme: Gamification) by **First Deploy** ([@firstdeployai](https://x.com/firstdeployai)).
 
-Still Going is the timer and the accountability:
+## Why it fits "turn a chore into a game that gets the chore done"
 
-- You start the raid when you start the chore, with the phone nearby.
-- Boss HP is the clock. It only hits zero if you last the full duration.
-- Every 40–50 seconds the phone asks **"Still going?"** Tap, hold, or swipe. That check only makes sense if you are actually there.
-- Miss two checks in a row, or leave the screen for 12 seconds, and the raid wipes. Soft landing, no lecture.
-- Last the whole timer and the boss goes down, because the chore did. You get XP, a day streak, and a clear card you can save as a PNG.
+Most chore apps gamify the *checklist*: you tick a box and get points, whether or not you did the work. Still Going gamifies the *doing*:
 
-No account. No backend. Progress lives in `localStorage` on the phone you were holding.
+- **The clock is the boss.** 5, 10, 15, or 25 minutes = 300, 600, 900, or 1,500 HP. The only way to drain it is to stay with the task.
+- **Presence checks.** Every 40–50 seconds (jittered) a "Still going?" check pops up: tap the mark, hold for a beat, or swipe. It takes a second with wet hands and is impossible to answer from the couch in another room.
+- **Real stakes, soft landing.** Miss two checks in a row, or leave the screen for 12 seconds, and the raid wipes. The wipe screen says how long you lasted and offers a retry. No guilt copy.
+- **Rewards that mean something.** A clear gives XP, a daily streak, a best time per chore, and a clear card PNG you can save or share.
 
-## Play
+## How to play
 
-1. Pick a chore and a duration (5, 10, 15, or 25 minutes).
-2. Start the raid when your hands hit the task.
-3. Answer the checks. Combo is how many you hit in a row.
-4. Survive the clock. Save the card if you want to show the streak.
+1. **Pick a chore** and a duration. Each chore has its own boss: Sink Beast, Laundry Drake, Bin Wraith, Dust Hydra, Clutter Golem, Inbox Wyrm, Couch Titan.
+2. **Start the raid when your hands hit the task.** Put the phone somewhere you can see it.
+3. **Answer "Still going?"** Tap, hold, or swipe (arrow keys work on desktop). Every hit grows your combo.
+4. **Survive the clock.** Boss down → confetti, XP, streak, and your clear card.
+5. **Come back tomorrow.** One clear a day keeps the streak. A wipe never erases a day you already cleared.
 
-A wipe does not erase a day you already cleared. Clear again today and the streak holds.
+Sound is short Web Audio cues (check alert, hit, miss, final stretch, clear, wipe) with a **mute toggle** in the top-right corner that remembers your choice. Phones that support it get a light vibration. The screen asks to stay awake during a raid, and `prefers-reduced-motion` turns off the looping motion and confetti.
 
-![The Laundry Drake. Its health bar is the countdown.](docs/raid.png)
+## Screenshots
 
-![Boss down. The clear card saves as a PNG.](docs/clear.png)
+| Raid | "Still going?" check | Clear card |
+| --- | --- | --- |
+| ![Laundry Drake raid. The health bar is the countdown.](docs/raid.png) | ![A presence check mid-raid](docs/check.png) | ![Clear card saved as PNG](docs/clear-card.png) |
 
-### Rehearsal
+## Run it locally
 
-A full raid is as long as the chore, which is a bad fit for a 60-second video. Add `?rehearsal=1` and a 5 minute selection plays in about 24 seconds. Checks come faster. Rehearsal clears celebrate and can still save a card, but they do not write your streak or XP.
-
-## Run it
+Requires Node 20+.
 
 ```bash
 npm install
-npm test
-npm run dev
+npm test        # engine + profile tests
+npm run dev     # http://localhost:5173
 ```
 
-Production build, the folder Netlify should publish:
+Production build:
 
 ```bash
-npm run build
+npm run build   # outputs dist/
 npm run preview
 ```
 
-`netlify.toml` builds with `npm run build` and publishes `dist/`. This repo does not deploy itself.
+It's a static site: no account, no backend, no API keys. Progress (streak, XP, history, best times, mute) lives in `localStorage` on the device. A small service worker caches the shell after the first load.
 
-The app is static. After the first load, a small service worker caches the shell so a later offline open still runs. Sound is Web Audio beeps with a mute toggle. The screen tries to stay awake during a raid. `prefers-reduced-motion` turns off the looping motion and the confetti.
+### Rehearsal mode (for demos)
+
+A real raid lasts as long as the chore. Add `?rehearsal=1` and a 5-minute raid plays in about 24 seconds with faster checks. Rehearsal clears are labeled **Practice**, and they don't write your streak or XP. See [`DEMO.md`](DEMO.md) for the shot list.
+
+The demo video in `demo/` is a real 5-minute raid recorded in a browser at a phone viewport. Long stretches are sped up, and the speed is shown on screen.
 
 ## Stack
 
-Vite, React, TypeScript, Tailwind. Bosses are inline SVG. The clear card is drawn on a canvas. Fonts ship with the bundle.
+Vite, React 19, TypeScript, and Tailwind v4. Bosses are inline SVG, the clear card is drawn on a `<canvas>`, sound is synthesized with Web Audio, and fonts ship with the bundle (Syne, Outfit, Oxanium). There are no runtime services.
+
+```
+src/lib/engine.ts      raid state machine: clock, jittered checks, misses, wipe/clear
+src/lib/profile.ts     streak, XP, history, best times (localStorage)
+src/lib/clearCard.ts   canvas → PNG clear card
+src/lib/audio.ts       Web Audio cues + mute
+src/components/        Home, Raid, Challenge overlay, Result, BossArt
+tests/                 node:test suites for the engine and profile
+```
+
+## Built during HackYard Yard #4
+
+All code in this repo was written during HackYard Yard #4 build week (Oct 5–9, 2026) for the Gamification theme. Solo build by First Deploy ([@firstdeployai](https://x.com/firstdeployai)).
+
+## License
+
+MIT. See [LICENSE](LICENSE).

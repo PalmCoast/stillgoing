@@ -48,6 +48,7 @@ function TapMark({ x, y, onSuccess }: { x: number; y: number; onSuccess: () => v
           onSuccess();
         }}
       >
+        <span className="mark-label" aria-hidden="true">Tap</span>
         <span className="sr">Tap the mark</span>
       </button>
     </div>

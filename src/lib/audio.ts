@@ -80,6 +80,16 @@ export const sfx = {
       16,
     );
   },
+  stretch() {
+    play(
+      [
+        { freq: 330, dur: 0.1, type: 'square', delay: 0, gain: 0.04 },
+        { freq: 330, dur: 0.1, type: 'square', delay: 0.16, gain: 0.04 },
+        { freq: 494, dur: 0.18, type: 'square', delay: 0.32, gain: 0.05 },
+      ],
+      [20, 40, 20],
+    );
+  },
   miss() {
     play([{ freq: 128, dur: 0.18, type: 'sawtooth', delay: 0, gain: 0.035 }], [36, 30, 36]);
   },
