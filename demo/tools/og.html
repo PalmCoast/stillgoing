@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: Syne;
+        src: url("./syne.woff2") format("woff2");
+        font-weight: 400 800;
+      }
+      @font-face {
+        font-family: Outfit;
+        src: url("./outfit.woff2") format("woff2");
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: Oxanium;
+        src: url("./oxanium.woff2") format("woff2");
+        font-weight: 200 800;
+      }
+      html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #120814; }
+      .poster {
+        width: 1200px;
+        height: 630px;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        background:
+          radial-gradient(700px 420px at 78% 42%, rgba(121, 231, 255, 0.28), transparent 60%),
+          radial-gradient(600px 380px at 10% -10%, rgba(255, 61, 138, 0.35), transparent 55%),
+          #120814;
+        color: #f6f1e7;
+        box-sizing: border-box;
+        padding: 56px 56px 40px 72px;
+      }
+      .kicker {
+        margin: 0 0 18px;
+        font-family: Outfit, sans-serif;
+        font-weight: 750;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #d6ff3f;
+        font-size: 18px;
+      }
+      h1 {
+        margin: 0;
+        font-family: Syne, sans-serif;
+        font-weight: 800;
+        font-size: 132px;
+        line-height: 0.8;
+        letter-spacing: -0.06em;
+      }
+      h1 span { color: #d6ff3f; }
+      .tag {
+        margin: 28px 0 0;
+        max-width: 14em;
+        font-family: Outfit, sans-serif;
+        font-size: 30px;
+        line-height: 1.2;
+        font-weight: 560;
+      }
+      .bar-label {
+        margin: 30px 0 8px;
+        font-family: Outfit, sans-serif;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: rgba(246, 241, 231, 0.7);
+      }
+      .bar {
+        width: 420px;
+        height: 22px;
+        border-radius: 99px;
+        border: 2px solid rgba(246, 241, 231, 0.25);
+        background: #2a1834;
+        overflow: hidden;
+      }
+      .bar i {
+        display: block;
+        width: 72%;
+        height: 100%;
+        background: linear-gradient(90deg, #b6e01a, #d6ff3f);
+      }
+      .credit {
+        margin: 34px 0 0;
+        font-family: Outfit, sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: rgba(246, 241, 231, 0.6);
+      }
+      .beast {
+        display: grid;
+        place-items: center;
+      }
+      svg { width: 420px; height: auto; }
+    </style>
+  </head>
+  <body>
+    <div class="poster">
+      <div>
+        <p class="kicker">HackYard Yard #4 · Gamification</p>
+        <h1>Still<br /><span>Going</span></h1>
+        <p class="tag">A boss fight that only dies if you actually finish the chore.</p>
+        <p class="bar-label">Sink Beast HP</p>
+        <div class="bar"><i></i></div>
+        <p class="credit">First Deploy · @firstdeployai</p>
+      </div>
+      <div class="beast">
+        <svg viewBox="0 0 240 200">
+          <ellipse cx="120" cy="184" rx="68" ry="10" fill="#000" opacity="0.28" />
+          <circle cx="62" cy="78" r="14" fill="#e9fbff" opacity="0.85" />
+          <circle cx="184" cy="64" r="10" fill="#e9fbff" opacity="0.8" />
+          <ellipse cx="120" cy="132" rx="74" ry="54" fill="#79e7ff" stroke="#1a0c12" stroke-width="3" />
+          <ellipse cx="120" cy="146" rx="46" ry="32" fill="#bff4ff" />
+          <path d="M104 46 h32 a8 8 0 0 1 8 8 v10 h-48 v-10 a8 8 0 0 1 8 -8z" fill="#d5dde6" stroke="#1a0c12" stroke-width="3" />
+          <path d="M112 46 q8 -18 16 0" fill="none" stroke="#d5dde6" stroke-width="6" stroke-linecap="round" />
+          <circle cx="94" cy="124" r="12" fill="#fff6ea" stroke="#1a0c12" stroke-width="3" />
+          <circle cx="146" cy="124" r="12" fill="#fff6ea" stroke="#1a0c12" stroke-width="3" />
+          <circle cx="98" cy="126" r="4.5" fill="#1a0c12" />
+          <circle cx="144" cy="125" r="4.5" fill="#1a0c12" />
+          <path d="M106 150 Q 120 162 134 150" fill="none" stroke="#1a0c12" stroke-width="3" stroke-linecap="round" />
+        </svg>
+      </div>
+    </div>
+  </body>
+</html>

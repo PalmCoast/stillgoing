@@ -101,17 +101,17 @@ export async function renderClearCard(data: CardData): Promise<Blob> {
 
   ctx.fillStyle = data.chore.color;
   ctx.beginPath();
-  ctx.arc(920, 180, 78, 0, Math.PI * 2);
+  ctx.arc(924, 150, 62, 0, Math.PI * 2);
   ctx.fill();
   ctx.fillStyle = '#120814';
   ctx.beginPath();
-  ctx.arc(892, 168, 16, 0, Math.PI * 2);
-  ctx.arc(948, 168, 16, 0, Math.PI * 2);
+  ctx.arc(902, 140, 13, 0, Math.PI * 2);
+  ctx.arc(946, 140, 13, 0, Math.PI * 2);
   ctx.fill();
   ctx.fillStyle = '#f6f1e7';
   ctx.beginPath();
-  ctx.arc(896, 172, 7, 0, Math.PI * 2);
-  ctx.arc(944, 172, 7, 0, Math.PI * 2);
+  ctx.arc(905, 143, 5.5, 0, Math.PI * 2);
+  ctx.arc(943, 143, 5.5, 0, Math.PI * 2);
   ctx.fill();
 
   ctx.textAlign = 'left';
@@ -122,8 +122,14 @@ export async function renderClearCard(data: CardData): Promise<Blob> {
   ctx.fillStyle = '#d6ff3f';
   ctx.fillRect(96, 184, 220, 10);
 
-  ctx.font = '800 108px "Syne Variable", sans-serif';
-  ctx.fillText(data.rehearsal ? 'PRACTICE' : 'CLEARED', 96, 320);
+  const headline = data.rehearsal ? 'PRACTICE' : 'CLEARED';
+  let headSize = 108;
+  ctx.font = `800 ${headSize}px "Syne Variable", sans-serif`;
+  while (headSize > 72 && ctx.measureText(headline).width > 880) {
+    headSize -= 4;
+    ctx.font = `800 ${headSize}px "Syne Variable", sans-serif`;
+  }
+  ctx.fillText(headline, 96, 320);
 
   const bossName = data.chore.boss.toUpperCase();
   ctx.fillStyle = '#f6f1e7';

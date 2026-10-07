@@ -1,5 +1,9 @@
 # Still Going — 45–60s demo
 
+**Recorded cut:** [`demo/still-going-demo.mp4`](demo/still-going-demo.mp4) (1280×720, ~57s, H.264 + AAC). It's a real 5:00 Laundry raid played in headless Chrome at a 390px phone viewport. All six "Still going?" checks (hold, tap, swipe) were answered, and the boss went down for real. The two long stretches are sped up 12× and 20×, with the speed shown on screen. The audio is the app's own Web Audio cues, re-synthesized from the logged events for the real-time beats. Stills are in `docs/`.
+
+## Record it yourself (manual take)
+
 Record a phone-shaped window, or a phone itself. Leave the sound on. The beeps are part of the joke. Open rehearsal so the raid fits the cut:
 
 `http://localhost:5173/?rehearsal=1`

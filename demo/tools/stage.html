@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8" />
+<style>
+@font-face { font-family: Syne; src: url(./syne.woff2) format("woff2"); font-weight: 400 800; }
+@font-face { font-family: Outfit; src: url(./outfit.woff2) format("woff2"); font-weight: 100 900; }
+@font-face { font-family: Oxanium; src: url(./oxanium.woff2) format("woff2"); font-weight: 200 800; }
+html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; background: #120814; color: #f6f1e7; font-family: Outfit, sans-serif; }
+.bg { position: absolute; inset: 0;
+  background:
+    radial-gradient(620px 420px at 74% 30%, rgba(121, 231, 255, 0.16), transparent 62%),
+    radial-gradient(560px 380px at 6% -6%, rgba(255, 61, 138, 0.28), transparent 58%),
+    radial-gradient(500px 340px at 20% 110%, rgba(214, 255, 63, 0.10), transparent 60%),
+    #120814; }
+.grid { position: absolute; inset: 0; opacity: .07;
+  background-image: linear-gradient(#f6f1e7 1px, transparent 1px), linear-gradient(90deg, #f6f1e7 1px, transparent 1px);
+  background-size: 48px 48px; mask-image: radial-gradient(circle at 50% 50%, #000, transparent 75%); }
+.left { position: absolute; left: 84px; top: 0; bottom: 0; width: 600px; display: flex; flex-direction: column; justify-content: center; }
+.kicker { margin: 0 0 18px; color: #d6ff3f; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; font-size: 15px; }
+h1 { margin: 0; font-family: Syne, sans-serif; font-weight: 800; font-size: 104px; line-height: .82; letter-spacing: -.06em; }
+h1 span { color: #d6ff3f; }
+.cap { margin-top: 34px; min-height: 150px; }
+.cap .step { font-family: Oxanium, monospace; font-weight: 700; color: #ff6d9a; letter-spacing: .12em; font-size: 15px; text-transform: uppercase; }
+.cap .line { margin-top: 10px; font-size: 36px; line-height: 1.15; font-weight: 640; letter-spacing: -.01em; max-width: 15em; }
+.cap .sub { margin-top: 12px; font-size: 19px; color: rgba(246,241,231,.68); max-width: 26em; line-height: 1.35; }
+.cap.swap { animation: swap .45s ease; }
+@keyframes swap { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.foot { position: absolute; left: 84px; bottom: 34px; font-size: 15px; color: rgba(246,241,231,.55); letter-spacing: .02em; }
+.foot b { color: rgba(246,241,231,.9); font-weight: 700; }
+.speed { position: absolute; right: 84px; top: 34px; font-family: Oxanium, monospace; font-weight: 800; font-size: 18px; color: #120814; background: #d6ff3f; padding: 6px 14px; border-radius: 999px; opacity: 0; transition: opacity .25s; }
+.speed.on { opacity: 1; }
+.phone { position: absolute; right: 150px; top: 26px; width: 334px; height: 668px; border-radius: 46px; background: #050205; box-shadow: 0 0 0 2px rgba(246,241,231,.18), 0 30px 80px rgba(0,0,0,.55), 0 0 120px rgba(255,61,138,.18); }
+.screen { position: absolute; left: 12px; top: 12px; width: 310px; height: 644px; border-radius: 36px; overflow: hidden; background: #120814; }
+iframe { border: 0; width: 390px; height: 810px; transform: scale(0.795); transform-origin: 0 0; }
+.end { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; background: #120814; opacity: 0; transition: opacity .6s; pointer-events: none; }
+.end.on { opacity: 1; }
+.end h2 { margin: 0; font-family: Syne, sans-serif; font-weight: 800; font-size: 120px; line-height: .82; letter-spacing: -.06em; }
+.end h2 span { color: #d6ff3f; }
+.end p { margin: 26px 0 0; font-size: 30px; font-weight: 600; }
+.end small { display: block; margin-top: 36px; font-size: 18px; color: rgba(246,241,231,.6); letter-spacing: .04em; }
+</style></head>
+<body>
+<div class="bg"></div><div class="grid"></div>
+<div class="left">
+  <p class="kicker">HackYard Yard #4 · Gamification</p>
+  <h1>Still<br /><span>Going</span></h1>
+  <div class="cap" id="cap"><div class="step" id="step"></div><div class="line" id="line"></div><div class="sub" id="sub"></div></div>
+</div>
+<div class="foot">Built by <b>First Deploy</b> · @firstdeployai · open source, runs in the browser</div>
+<div class="speed" id="speed">16×</div>
+<div class="phone"><div class="screen"><iframe id="app" src="about:blank" allow="autoplay"></iframe></div></div>
+<div class="end" id="end"><div>
+  <h2>Still<br /><span>Going</span></h2>
+  <p>A boss fight that only dies if you actually finish the chore.</p>
+  <small>Built during HackYard Yard #4 · First Deploy · @firstdeployai</small>
+</div></div>
+<script>
+window.caption = (step, line, sub) => {
+  const c = document.getElementById('cap');
+  document.getElementById('step').textContent = step || '';
+  document.getElementById('line').textContent = line || '';
+  document.getElementById('sub').textContent = sub || '';
+  c.classList.remove('swap'); void c.offsetWidth; c.classList.add('swap');
+};
+window.speed = (label) => { const s = document.getElementById('speed'); s.textContent = label || ''; s.classList.toggle('on', !!label); };
+window.endCard = (on) => document.getElementById('end').classList.toggle('on', on);
+</script>
+</body></html>
