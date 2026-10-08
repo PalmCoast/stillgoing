@@ -6,7 +6,9 @@ Pick a real chore — dishes, laundry, trash, vacuum, desk, inbox, or a workout 
 
 ![Still Going: pick a chore, start the raid, answer the checks, drop the boss](docs/hero.png)
 
-**Demo video (55s):** [`demo/still-going-demo.mp4`](demo/still-going-demo.mp4)
+**Play it live:** https://stillgoing.netlify.app (add `?rehearsal=1` for a 24-second demo raid)
+
+**Demo video (56s):** [`demo/still-going-demo.mp4`](demo/still-going-demo.mp4)
 
 Built during **HackYard Yard #4** (theme: Gamification) by **First Deploy** ([@firstdeployai](https://x.com/firstdeployai)).
 
